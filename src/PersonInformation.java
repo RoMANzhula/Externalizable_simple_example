@@ -11,46 +11,46 @@ public class PersonInformation implements Externalizable, EncryptData, DecryptDa
 
     private static final long serialVersionUID = 1L;
 
-    public PersonInformation() { //конструктор класса без параметров (конструктор по-умолчанию) - обязательный при использовании
-        //интерфейса Externalizable (это одно из отличий от Serializable, в котором используется Reflection API)
+    public PersonInformation() { // конструктор класу без параметрів (конструктор за замовчуванням) - обов'язковий при використанні
+        // інтерфейсу Externalizable (це одна з відмінностей від Serializable, де використовується Reflection API)
     }
 
-    public PersonInformation(String name, int phoneNumber, String gender, String secretPassword) { //конструктор с параметрами
-        this.name = name; //инициализация полей класса
+    public PersonInformation(String name, int phoneNumber, String gender, String secretPassword) { // конструктор з параметрами
+        this.name = name; // ініціалізація полів класу
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.secretPassword = secretPassword;
     }
 
-    @Override //обязательный для реализации метод интерфейса Externalizable (для сохранения данных)
+    @Override // обов'язковий для реалізації метод інтерфейсу Externalizable (для збереження даних)
     public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeObject(this.getName()); //записываем(сохраняем) имя
-        out.writeObject(this.getPhoneNumber()); //записываем(сохраняем) номер телефона
-        out.writeObject(this.getGender()); //записываем(сохраняем) гендерную принадлежность
-        out.writeObject(this.encryptString(this.getSecretPassword())); //записываем(сохраняем) пароль, закодировав его с
-        //помощью метода интерфейса EncryptData encryptString()
+        out.writeObject(this.getName()); // записуємо (зберігаємо) ім'я
+        out.writeObject(this.getPhoneNumber()); // записуємо (зберігаємо) номер телефону
+        out.writeObject(this.getGender()); // записуємо (зберігаємо) гендерну приналежність
+        out.writeObject(this.encryptString(this.getSecretPassword())); // записуємо (зберігаємо) пароль, закодувавши його за
+        // допомогою методу інтерфейсу EncryptData encryptString()
     }
 
-    @Override //обязательный для реализации метод интерфейса Externalizable (для загрузки данных)
+    @Override // обов'язковий для реалізації метод інтерфейсу Externalizable (для завантаження даних)
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        name = (String) in.readObject(); //считываем(загружаем) имя
-        phoneNumber = (int) in.readObject(); //считываем(загружаем) номер телефона
-        gender = (String) in.readObject(); //считываем(загружаем) гендерную принадлежность
-        secretPassword = this.decryptString((String) in.readObject()); //считываем(загружаем) пароль, раскодировав его с
-        //помощью метода интерфейса EncryptData decryptString()
+        name = (String) in.readObject(); // зчитуємо (завантажуємо) ім'я
+        phoneNumber = (int) in.readObject(); // зчитуємо (завантажуємо) номер телефону
+        gender = (String) in.readObject(); // зчитуємо (завантажуємо) гендерну приналежність
+        secretPassword = this.decryptString((String) in.readObject()); // зчитуємо (завантажуємо) пароль, розшифрувавши його за
+        // допомогою методу інтерфейсу EncryptData decryptString()
     }
 
-    @Override //имплементируем метод интерфейса EncryptData для шифрования, оставив его без изменений в функционале
+    @Override // імплементуємо метод інтерфейсу EncryptData для шифрування, залишаючи його без змін у функціоналі
     public String encryptString(String data) {
         return EncryptData.super.encryptString(data);
     }
 
-    @Override //имплементируем метод интерфейса DecryptData для расшифрования, оставив его без изменений в функционале
+    @Override // імплементуємо метод інтерфейсу DecryptData для розшифрування, залишаючи його без змін у функціоналі
     public String decryptString(String data) {
         return DecryptData.super.decryptString(data);
     }
 
-    //только Геттеры для полей класса
+    // тільки Геттері для полів класу
     public String getName() {
         return name;
     }
@@ -67,7 +67,7 @@ public class PersonInformation implements Externalizable, EncryptData, DecryptDa
         return secretPassword;
     }
 
-    @Override //переопределяем метод к строковому виду
+    @Override // переозначаємо метод до строкового виду
     public String toString() {
         return "PersonInformation{" +
                 "name='" + name + '\'' +
