@@ -2,34 +2,34 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        String pathToFile = "C:\\Users\\Admin\\Desktop\\Новий текстовий документ.txt"; //путь к файлу инициализируем в переменную
+        String pathToFile = "C:\\Users\\Admin\\Desktop\\Новий текстовий документ.txt"; //шлях до файлу ініціалізуємо в змінну
 
-        ////код для сохранения данных
+        ////код для збереження даних
 
-        FileOutputStream fileOutputStream = new FileOutputStream(pathToFile); //открываем поток для записи данных в файл
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); //подкласс класса OutputStream, в
-        //арсенале которого есть метод для записи данных (примитивных и обьектов)
+        FileOutputStream fileOutputStream = new FileOutputStream(pathToFile); //відкриваємо потік для запису даних у файл
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); //підклас класу OutputStream, в
+        //арсеналі якого є метод для запису даних (примітивних та об'єктів)
 
         PersonInformation person1 = new PersonInformation("Mykola Bond",
-                007, "Man in black", "Mother's Maiden Name"); //создаем новый обьект и инициализируем
-        //его, согласно конструктора его класса
+                007, "Man in black", "Mother's Maiden Name"); //створюємо новий об'єкт і ініціалізуємо
+        //його, відповідно до конструктора його класу
 
-        objectOutputStream.writeObject(person1); //пишем в поток данные о обьекте
-        objectOutputStream.close(); //очищаем ресурсы (можно воспользоваться try-with-resource)
+        objectOutputStream.writeObject(person1); //пишемо в потік дані про об'єкт
+        objectOutputStream.close(); //очищуємо ресурси (можна скористатись try-with-resource)
 
-        ////код для загрузки данных
+        ////код для завантаження даних
 
-        FileInputStream fileInputStream = new FileInputStream(pathToFile); //открываем поток для чтения данных из файла
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream); //подкласс класса InputStream, в
-        //арсенале которого есть метод для чтения(извлечения) данных (примитивных и обьектов)
+        FileInputStream fileInputStream = new FileInputStream(pathToFile); //відкриваємо потік для читання даних з файлу
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream); //підклас класу InputStream, в
+        //арсеналі якого є метод для читання (витягування) даних (примітивних та об'єктів)
 
-        PersonInformation clonePerson1 = (PersonInformation) objectInputStream.readObject(); //создаем ссылочную переменную
-        //типа класса PersonInformation и инициализируем ее считанными данными из указанного файла, приведенными к типу класса
-        //PersonInformation (обрабатываем исключение ClassNotFoundException)
+        PersonInformation clonePerson1 = (PersonInformation) objectInputStream.readObject(); //створюємо посилальну змінну
+        //типу класу PersonInformation і ініціалізуємо її вчитаними даними з вказаного файлу, приведеними до типу класу
+        //PersonInformation (обробляємо виключення ClassNotFoundException)
 
-        System.out.println("Result woo a la... : " + clonePerson1); //выводим на консоль информацию
+        System.out.println("Результат woo a la... : " + clonePerson1); //виводимо на консоль інформацію
 
-        objectInputStream.close(); //очищаем ресурсы
+        objectInputStream.close(); //очищуємо ресурси
 
     }
 }
